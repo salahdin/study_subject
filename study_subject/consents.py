@@ -12,7 +12,7 @@ app_config = django_apps.get_app_config('edc_protocol')
 tzinfo = gettz('Africa/Gaborone')
 
 v1 = Consent(
-    'cancer_subject.subjectconsent',
+    'study_subject.subjectconsent',
     version='1',
     start=arrow.get(
         datetime(2010, 5, 2, 0, 0, 0), tzinfo=tzinfo).to('UTC').datetime,
