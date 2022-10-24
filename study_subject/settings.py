@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -29,8 +29,15 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
+SITE_ID = 2
 APP_NAME = "study_subject"
+
+
+AUTO_CREATE_KEYS = True
+
+KEY_PATH = os.path.join(BASE_DIR, 'crypto_fields')
+
+ETC_DIR = '/etc'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -39,7 +46,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'django.contrib.sites',
+    #'django_crypto_fields.apps.AppConfig',
+    #'django_revision.apps.AppConfig',
+    'study_subject',
+    'edc_device.apps.AppConfig',
+    'edc_identifier.apps.AppConfig',
+    'study_subject.apps.EdcTimepointAppConfig',
 ]
 
 MIDDLEWARE = [

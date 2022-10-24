@@ -1,4 +1,4 @@
-from edc_constants.constants import YES
+from edc_constants.constants import YES,NO
 import datetime
 
 
@@ -16,7 +16,7 @@ class AgeEvaluator:
 
     def __init__(self, is_minor=None, ):
         self.eligible = None
-        if is_minor == YES:
+        if is_minor == NO:
             self.eligible = True
         else:
             self.eligible = False
@@ -37,10 +37,10 @@ class Eligibility:
     def __init__(self, citizenship_status=None, literacy=None, is_minor=None):
         self.citizenship = CitizenshipEvaluator(citizen=citizenship_status)
         self.literacy = LiteracyEvaluator(literacy=literacy)
-        self.is_minor = AgeEvaluator(is_minor=is_minor)
+        self.is_not_minor = AgeEvaluator(is_minor=is_minor)
         self.criteria = dict(
             citizenship=self.citizenship.eligible,
-            is_minor=self.is_minor.eligible,
+            is_not_minor=self.is_not_minor.eligible,
             literecy=self.literacy.eligible
         )
         self.eligible = all(self.criteria.values())

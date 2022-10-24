@@ -1,7 +1,7 @@
 """
 1. Define the app
 2. Define the study period.
-3. Define timie point
+3. Define time point
 """
 from django.apps import AppConfig as DjangoAppConfig
 from edc_appointment.constants import COMPLETE_APPT
@@ -23,7 +23,7 @@ class AppConfig(DjangoAppConfig):
 
 if settings.APP_NAME == 'study_subject':
     class EdcProtocolAppConfig(BaseEdcProtocolAppConfig):
-        protocol = 'BHP045'
+        protocol = 'BHP041'
         protocol_name = 'Study'
         protocol_number = '045'
         protocol_title = ''
@@ -32,12 +32,11 @@ if settings.APP_NAME == 'study_subject':
         study_close_datetime = datetime(
             2023, 12, 31, 23, 59, 59, tzinfo=gettz('UTC'))
 
-
     class EdcTimepointAppConfig(BaseEdcTimepointAppConfig):
         timepoints = TimepointCollection(
             timepoints=[
                 Timepoint(
-                    model='StudySubject.appointment',
+                    model='study_subject.appointment',
                     datetime_field='appt_datetime',
                     status_field='appt_status',
                     closed_status=COMPLETE_APPT),
