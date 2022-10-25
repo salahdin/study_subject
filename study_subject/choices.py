@@ -28,7 +28,7 @@ HOUSEMATE = (
     ('Alone', 'Alone'),
     ('Partner/Spouse', 'Partner/Spouse'),
     ('Sibling', 'Sibling'),
-    ('Other', 'Other')
+    (OTHER, 'Other')
 )
 
 EMPLOYMENT_TYPE = (

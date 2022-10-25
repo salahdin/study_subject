@@ -1,12 +1,14 @@
 from django.core.exceptions import ImproperlyConfigured
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.sites import SiteModelMixin
-#from edc_consent.field_mixins import VulnerabilityFieldsMixin, SampleCollectionFieldsMixin, IdentityFieldsMixin, \
-#    ReviewFieldsMixin, CitizenFieldsMixin, PersonalFieldsMixin
-#from edc_consent.model_mixins import ConsentModelMixin
+from edc_consent.field_mixins import VulnerabilityFieldsMixin, \
+    SampleCollectionFieldsMixin, IdentityFieldsMixin, \
+    ReviewFieldsMixin, CitizenFieldsMixin, PersonalFieldsMixin
+from edc_consent.model_mixins import ConsentModelMixin
 from edc_identifier.model_mixins import UniqueSubjectIdentifierFieldMixin, NonUniqueSubjectIdentifierModelMixin
 from django.db import models
 from ..choices import HOUSEMATE
+from edc_base.sites import CurrentSiteManager
 from edc_constants.choices import GENDER
 from edc_base.constants import DEFAULT_BASE_FIELDS
 from edc_consent.managers import ConsentManager as SubjectConsentManager
@@ -18,8 +20,8 @@ from .model_mixins import SearchSlugModelMixin
 
 
 class SubjectConsent(
-    SiteModelMixin,
-    NonUniqueSubjectIdentifierModelMixin, SearchSlugModelMixin, BaseUuidModel):
+    SiteModelMixin, NonUniqueSubjectIdentifierModelMixin,
+    SearchSlugModelMixin, BaseUuidModel):
     screening_identifier = models.CharField(
         verbose_name='Screening identifier',
         null=True,
@@ -54,7 +56,7 @@ class SubjectConsent(
 
     history = HistoricalRecords()
 
-    # on_site = CurrentSiteManager()
+    on_site = CurrentSiteManager()
 
     def __str__(self):
         return f'{self.subject_identifier} V{self.version}'
@@ -82,9 +84,7 @@ class SubjectConsent(
             site=self.site)
         return subject_identifier.identifier
 
-    """class Meta(ConsentModelMixin.Meta):
+    class Meta:
         app_label = 'study_subject'
-        get_latest_by = 'consent_datetime'
-        unique_together = (('subject_identifier', 'version'),
-                           ('first_name', 'dob', 'initials', 'version'))
-        ordering = ('-created',)"""
+        verbose_name = 'Subject Consent'
+        verbose_name_plural = 'Subject Consent'

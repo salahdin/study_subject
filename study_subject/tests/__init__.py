@@ -1,1 +1,2 @@
 from .test_subject_screening import SubjectScreeningTest
+from .test_subject_consent import SubjectConsentTest

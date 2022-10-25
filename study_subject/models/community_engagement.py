@@ -31,3 +31,8 @@ class CommunityEngagement(CrfModelMixin):
         max_length=100,
         choices=YES_NO_NA_DWTA
     )
+
+    class Meta:
+        app_label = 'study_subject'
+        verbose_name = 'Community Engagement Questionnaire'
+        verbose_name_plural = 'Community Engagement Questionnaire'

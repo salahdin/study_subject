@@ -1,6 +1,7 @@
 from django.test import TestCase
 from ..models.subject_screening import SubjectScreening
-from edc_constants.constants import YES,NO,MALE
+from edc_constants.constants import YES, NO, MALE
+
 
 class SubjectScreeningTest(TestCase):
 
@@ -13,7 +14,6 @@ class SubjectScreeningTest(TestCase):
             literacy=YES,
             is_minor=NO
         )
-        # self.assertEqual(str(entry), entry.title)
         self.assertIsInstance(subject_screening_instance, SubjectScreening)
 
     def test_subject_screening_identifier(self):
