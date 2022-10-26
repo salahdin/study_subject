@@ -21,7 +21,7 @@ from .model_mixins import SearchSlugModelMixin
 
 class SubjectConsent(
     SiteModelMixin, NonUniqueSubjectIdentifierModelMixin,
-    SearchSlugModelMixin, BaseUuidModel):
+    SearchSlugModelMixin, IdentityFieldsMixin, PersonalFieldsMixin, BaseUuidModel):
     screening_identifier = models.CharField(
         verbose_name='Screening identifier',
         null=True,

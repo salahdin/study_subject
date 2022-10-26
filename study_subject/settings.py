@@ -27,10 +27,13 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # Application definition
-SITE_ID = 2
+SITE_ID = 1
 APP_NAME = "study_subject"
 
 AUTO_CREATE_KEYS = True
+
+# For Test
+EDC_PROTOCOL_NUMBER = 123
 
 KEY_PATH = os.path.join(BASE_DIR, 'crypto_fields')
 
@@ -52,6 +55,7 @@ INSTALLED_APPS = [
     'edc_registration.apps.AppConfig',
     'edc_identifier.apps.AppConfig',
     'study_subject.apps.EdcTimepointAppConfig',
+    'edc_sites.apps.AppConfig'
 ]
 
 MIDDLEWARE = [
