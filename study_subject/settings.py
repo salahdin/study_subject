@@ -30,7 +30,7 @@ ALLOWED_HOSTS = []
 SITE_ID = 1
 APP_NAME = "study_subject"
 
-AUTO_CREATE_KEYS = True
+AUTO_CREATE_KEYS = False
 
 # For Test
 EDC_PROTOCOL_NUMBER = 123

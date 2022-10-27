@@ -43,7 +43,7 @@ class SubjectScreening(
         default=NOT_APPLICABLE,
         null=True,
         blank=False,
-        help_text='If \'No\', participant may not be consented.',
+        help_text="If 'No', participant may not be consented.",
     )
 
     marriage_certificate = models.CharField(

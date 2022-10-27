@@ -1,16 +1,14 @@
 from django.core.exceptions import ImproperlyConfigured
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.sites import SiteModelMixin
-from edc_consent.field_mixins import VulnerabilityFieldsMixin, \
-    SampleCollectionFieldsMixin, IdentityFieldsMixin, \
-    ReviewFieldsMixin, CitizenFieldsMixin, PersonalFieldsMixin
+from edc_consent.field_mixins import IdentityFieldsMixin, \
+    ReviewFieldsMixin, PersonalFieldsMixin
 from edc_consent.model_mixins import ConsentModelMixin
-from edc_identifier.model_mixins import UniqueSubjectIdentifierFieldMixin, NonUniqueSubjectIdentifierModelMixin
+from edc_identifier.model_mixins import UniqueSubjectIdentifierModelMixin
 from django.db import models
 from ..choices import HOUSEMATE
 from edc_base.sites import CurrentSiteManager
 from edc_constants.choices import GENDER
-from edc_base.constants import DEFAULT_BASE_FIELDS
 from edc_consent.managers import ConsentManager as SubjectConsentManager
 
 from edc_search.model_mixins import SearchSlugManager
@@ -19,9 +17,18 @@ from ..subject_identifier import SubjectIdentifier
 from .model_mixins import SearchSlugModelMixin
 
 
+class ConsentManager(SubjectConsentManager, SearchSlugManager):
+
+    def get_by_natural_key(self, subject_identifier, version):
+        return self.get(
+            subject_identifier=subject_identifier, version=version)
+
+
 class SubjectConsent(
-    SiteModelMixin, NonUniqueSubjectIdentifierModelMixin,
-    SearchSlugModelMixin, IdentityFieldsMixin, PersonalFieldsMixin, BaseUuidModel):
+    SiteModelMixin, UniqueSubjectIdentifierModelMixin,
+    SearchSlugModelMixin, IdentityFieldsMixin,
+    PersonalFieldsMixin, BaseUuidModel):
+
     screening_identifier = models.CharField(
         verbose_name='Screening identifier',
         null=True,
@@ -52,7 +59,7 @@ class SubjectConsent(
 
     consent = SubjectConsentManager()
 
-    objects = SubjectConsentManager()
+    objects = ConsentManager()
 
     history = HistoricalRecords()
 

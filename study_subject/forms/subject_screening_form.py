@@ -3,12 +3,15 @@ from django import forms
 from ..models import SubjectScreening
 
 
-class SubjectModelFormMixin(forms.ModelForm):
+# from study_subject_validations.study_subject_validations.form_validators import SubjectScreeningFormValidator
 
+
+class SubjectModelFormMixin(forms.ModelForm):
     pass
 
 
 class SubjectScreeningForm(SubjectModelFormMixin):
+    # form_validation_cls = SubjectScreeningFormValidator
 
     subject_identifier = forms.CharField(
         label='Subject identifier',
