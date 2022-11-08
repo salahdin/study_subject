@@ -49,23 +49,28 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django_crypto_fields.apps.AppConfig',
     'django_revision.apps.AppConfig',
-    'study_subject',
+    'study_subject.apps.AppConfig',
     'edc_device.apps.AppConfig',
-    'edc_protocol.apps.AppConfig',
     'edc_registration.apps.AppConfig',
     'edc_identifier.apps.AppConfig',
     'study_subject.apps.EdcTimepointAppConfig',
-    'edc_sites.apps.AppConfig'
+    'study_subject.apps.EdcProtocolAppConfig',
+    'study_subject.apps.EdcVisitTrackingAppConfig',
+    'edc_sites.apps.AppConfig',
+    'edc_base.apps.AppConfig'
+
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.contrib.sites.middleware.CurrentSiteMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'study_subject.urls'

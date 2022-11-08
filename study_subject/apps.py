@@ -1,11 +1,12 @@
 """
 1. Define the app
 2. Define the study period.
-3. Define time point
+3. Define timepoint
 """
 from django.apps import AppConfig as DjangoAppConfig
 from edc_appointment.constants import COMPLETE_APPT
 from edc_protocol.apps import AppConfig as BaseEdcProtocolAppConfig
+from edc_visit_tracking.apps import AppConfig as BaseEdcVisitTrackingAppConfig
 from datetime import datetime
 from django.conf import settings
 
@@ -31,6 +32,12 @@ if settings.APP_NAME == 'study_subject':
             2010, 5, 2, 0, 0, 0, tzinfo=gettz('UTC'))
         study_close_datetime = datetime(
             2023, 12, 31, 23, 59, 59, tzinfo=gettz('UTC'))
+
+
+    class EdcVisitTrackingAppConfig(BaseEdcVisitTrackingAppConfig):
+        visit_models = {
+            'study_subject': ('subject_visit', 'study_subject.subjectvisit')}
+
 
     class EdcTimepointAppConfig(BaseEdcTimepointAppConfig):
         timepoints = TimepointCollection(

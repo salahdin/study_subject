@@ -15,6 +15,7 @@ from ..screening_identifier import ScreeningIdentifier
 class SubjectScreening(
         UniqueSubjectIdentifierFieldMixin, SiteModelMixin,
         SearchSlugModelMixin, BaseUuidModel):
+
     eligibility_cls = Eligibility
     identifier_cls = ScreeningIdentifier
 

@@ -1,0 +1,22 @@
+Metadata-Version: 2.1
+Name: study-subject
+Version: 0.1
+Summary: study subject
+Home-page: https://github.com/salahdin/study_subject
+Author: Salahdin
+Author-email: salahdinjemal@gmail.com
+License: GPL license, see LICENSE
+Keywords: django
+Platform: UNKNOWN
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU General Public License (GPL)
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+
+# study_subject
+
+

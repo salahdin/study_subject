@@ -1,56 +1,42 @@
 from django.contrib import admin
-from django_revision.modeladmin_mixin import ModelAdminRevisionMixin
-
-from edc_base.sites.admin import ModelAdminSiteMixin
-from edc_model_admin import (
-    ModelAdminNextUrlRedirectMixin, ModelAdminFormInstructionsMixin,
-    ModelAdminFormAutoNumberMixin, ModelAdminAuditFieldsMixin,
-    ModelAdminReadOnlyMixin, ModelAdminInstitutionMixin,
-    ModelAdminRedirectOnDeleteMixin)
+from .modeladmin_mixins import ModelAdminMixin
 from edc_model_admin.model_admin_audit_fields_mixin import (
     audit_fields, audit_fieldset_tuple)
-from edc_metadata import NextFormGetter
-
-#from ..admin_site import cancer_subject_admin
+from ..admin_site import study_subject_admin
 from ..forms import SubjectScreeningForm
 from ..models import SubjectScreening
 
 
-class ModelAdminMixin(ModelAdminNextUrlRedirectMixin,
-                      ModelAdminFormInstructionsMixin,
-                      ModelAdminFormAutoNumberMixin, ModelAdminRevisionMixin,
-                      ModelAdminAuditFieldsMixin, ModelAdminReadOnlyMixin,
-                      ModelAdminInstitutionMixin,
-                      ModelAdminRedirectOnDeleteMixin,
-                      ModelAdminSiteMixin):
-
-    list_per_page = 10
-    date_hierarchy = 'modified'
-    empty_value_display = '-'
-    next_form_getter_cls = NextFormGetter
-
-
-@admin.register(SubjectScreening)
+@admin.register(SubjectScreening, site=study_subject_admin)
 class SubjectScreeningAdmin(
-        ModelAdminMixin, admin.ModelAdmin):
-
+    ModelAdminMixin, admin.ModelAdmin):
     form = SubjectScreeningForm
 
     fieldsets = (
         (None, {
             'fields': (
-                'report_datetime',
-                'subject_identifier',
-                'has_diagnosis',
-                'enrollment_site',
+                'gender',
+                'citizen',
+                'legal_marriage',
+                'marriage_certificate',
+                'marriage_certificate_no',
+                'literacy',
+                'witness',
+                'is_minor',
+                'guardian',
+                'eligible'
             )}),
         audit_fieldset_tuple)
 
-    search_fields = ('subject_identifier',)
-
     radio_fields = {
-        'has_diagnosis': admin.VERTICAL,
-        'enrollment_site': admin.VERTICAL, }
+        'gender': admin.VERTICAL,
+        'citizen': admin.VERTICAL,
+        'legal_marriage': admin.VERTICAL,
+        'marriage_certificate': admin.VERTICAL,
+        'witness': admin.VERTICAL,
+        'is_minor': admin.VERTICAL,
+        'guardian': admin.VERTICAL,
+        'literacy': admin.VERTICAL, }
 
     def get_readonly_fields(self, request, obj=None):
         return (super().get_readonly_fields(request, obj=obj)
