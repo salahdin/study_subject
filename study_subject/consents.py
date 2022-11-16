@@ -15,7 +15,7 @@ v1 = Consent(
     'study_subject.subjectconsent',
     version='1',
     start=arrow.get(
-        datetime(2010, 5, 2, 0, 0, 0), tzinfo=tzinfo).to('UTC').datetime,
+        datetime(2011, 5, 3, 0, 0, 0), tzinfo=tzinfo).to('UTC').datetime,
     end=arrow.get(
         datetime(2023, 12, 31, 23, 59, 59), tzinfo=tzinfo).to('UTC').datetime,
     age_min=18,

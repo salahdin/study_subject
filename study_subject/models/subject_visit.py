@@ -3,7 +3,8 @@ from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.sites import CurrentSiteManager as BaseCurrentSiteManager
 from edc_base.sites.site_model_mixin import SiteModelMixin
-#from edc_consent.model_mixins import RequiresConsentFieldsModelMixin
+from edc_consent.model_mixins import RequiresConsentFieldsModelMixin
+from edc_appointment.models import Appointment
 from edc_constants.constants import NOT_APPLICABLE
 from edc_metadata.model_mixins.creates import CreatesMetadataModelMixin
 from edc_reference.model_mixins import ReferenceModelMixin
@@ -11,7 +12,6 @@ from edc_visit_tracking.managers import VisitModelManager
 from edc_visit_tracking.model_mixins import VisitModelMixin
 
 from ..choices import VISIT_INFO_SOURCE, VISIT_UNSCHEDULED_REASON, VISIT_REASON
-from .appointment import Appointment
 
 
 class CurrentSiteManager(VisitModelManager, BaseCurrentSiteManager):
@@ -19,10 +19,9 @@ class CurrentSiteManager(VisitModelManager, BaseCurrentSiteManager):
 
 
 class SubjectVisit(
-        VisitModelMixin, CreatesMetadataModelMixin,
-        ReferenceModelMixin,
-        SiteModelMixin, BaseUuidModel):
-
+    VisitModelMixin, CreatesMetadataModelMixin,
+    RequiresConsentFieldsModelMixin, ReferenceModelMixin,
+    SiteModelMixin, BaseUuidModel):
     """A model completed by the user that captures the covering
     information for the data collected for this timepoint/appointment,
     e.g.report_datetime.

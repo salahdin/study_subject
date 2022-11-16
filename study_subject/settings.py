@@ -49,9 +49,13 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django_crypto_fields.apps.AppConfig',
     'django_revision.apps.AppConfig',
+    'edc_action_item.apps.AppConfig',
     'study_subject.apps.AppConfig',
     'edc_device.apps.AppConfig',
+    'edc_visit_schedule.apps.AppConfig',
+    'edc_appointment.apps.AppConfig',
     'edc_registration.apps.AppConfig',
+    'edc_consent.apps.AppConfig',
     'edc_identifier.apps.AppConfig',
     'study_subject.apps.EdcTimepointAppConfig',
     'study_subject.apps.EdcProtocolAppConfig',
@@ -64,13 +68,14 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.contrib.sites.middleware.CurrentSiteMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
+    'edc_dashboard.middleware.DashboardMiddleware',
+    'edc_subject_dashboard.middleware.DashboardMiddleware',
 ]
 
 ROOT_URLCONF = 'study_subject.urls'
@@ -92,6 +97,13 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'study_subject.wsgi.application'
+
+# dashboards
+DASHBOARD_URL_NAMES = {
+    'subject_listboard_url': 'study_dashboard:subject_listboard_url',
+    'screening_listboard_url': 'study_dashboard:screening_listboard_url',
+    'subject_dashboard_url': 'study_dashboard:subject_dashboard_url',
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases

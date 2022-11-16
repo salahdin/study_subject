@@ -3,6 +3,7 @@ from edc_constants.choices import GENDER, YES_NO, YES_NO_NA
 from edc_constants.constants import NOT_APPLICABLE, YES, NO
 from edc_base.model_mixins import BaseUuidModel
 from django.db import models
+from edc_base.utils import get_utcnow
 from edc_base.model_validators import eligible_if_no
 
 from edc_identifier.model_mixins import UniqueSubjectIdentifierFieldMixin
@@ -13,9 +14,8 @@ from ..screening_identifier import ScreeningIdentifier
 
 
 class SubjectScreening(
-        UniqueSubjectIdentifierFieldMixin, SiteModelMixin,
-        SearchSlugModelMixin, BaseUuidModel):
-
+    UniqueSubjectIdentifierFieldMixin, SiteModelMixin,
+    SearchSlugModelMixin, BaseUuidModel):
     eligibility_cls = Eligibility
     identifier_cls = ScreeningIdentifier
 
@@ -24,6 +24,11 @@ class SubjectScreening(
         max_length=36,
         unique=True,
         editable=False)
+
+    report_datetime = models.DateTimeField(
+        verbose_name='Report Date and Time',
+        default=get_utcnow,
+        help_text='Date and time of report.')
 
     gender = models.CharField(choices=GENDER,
                               verbose_name="Gender of Participant",
@@ -96,6 +101,9 @@ class SubjectScreening(
     )
 
     eligible = models.BooleanField()
+
+    def __str__(self):
+        return f'{self.screening_identifier}'
 
     def save(self, *args, **kwargs):
         citizenship_status = NO

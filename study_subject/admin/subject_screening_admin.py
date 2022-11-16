@@ -10,11 +10,13 @@ from ..models import SubjectScreening
 @admin.register(SubjectScreening, site=study_subject_admin)
 class SubjectScreeningAdmin(
     ModelAdminMixin, admin.ModelAdmin):
+    readonly_fields = ('screening_identifier',)
     form = SubjectScreeningForm
 
     fieldsets = (
         (None, {
             'fields': (
+                'screening_identifier',
                 'gender',
                 'citizen',
                 'legal_marriage',

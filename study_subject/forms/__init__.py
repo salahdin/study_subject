@@ -2,3 +2,4 @@ from .subject_screening_form import SubjectScreeningForm
 from .subject_consent_form import SubjectConsentForm
 from .community_engagement_form import CommunityEngagementForms
 from .education_form import EducationForm
+from .subject_locator_form import SubjectLocatorForm

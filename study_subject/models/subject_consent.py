@@ -24,11 +24,10 @@ class ConsentManager(SubjectConsentManager, SearchSlugManager):
             subject_identifier=subject_identifier, version=version)
 
 
-class SubjectConsent(
-    SiteModelMixin, UniqueSubjectIdentifierModelMixin,
-    SearchSlugModelMixin, IdentityFieldsMixin,
-    PersonalFieldsMixin, BaseUuidModel):
-
+class SubjectConsent(ConsentModelMixin, SiteModelMixin,
+                     UniqueSubjectIdentifierModelMixin, SearchSlugModelMixin,
+                     IdentityFieldsMixin, PersonalFieldsMixin, BaseUuidModel):
+    subject_screening_model = 'study_subject.subjectscreening'
     screening_identifier = models.CharField(
         verbose_name='Screening identifier',
         null=True,
@@ -40,11 +39,14 @@ class SubjectConsent(
         choices=GENDER,
         max_length=1,
         null=True,
+        blank=True
 
     )
 
     partners = models.IntegerField(
         verbose_name="How many wives does the participant have",
+        null=True,
+        blank=True
     )
 
     housemate = models.CharField(
@@ -52,6 +54,7 @@ class SubjectConsent(
         choices=HOUSEMATE,
         max_length=50,
         null=True,
+        blank=True
 
     )
 
@@ -91,7 +94,7 @@ class SubjectConsent(
             site=self.site)
         return subject_identifier.identifier
 
-    class Meta:
+    class Meta(ConsentModelMixin.Meta):
         app_label = 'study_subject'
         verbose_name = 'Subject Consent'
         verbose_name_plural = 'Subject Consent'

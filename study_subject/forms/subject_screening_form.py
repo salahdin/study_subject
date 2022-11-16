@@ -12,6 +12,10 @@ class SubjectModelFormMixin(forms.ModelForm):
 
 class SubjectScreeningForm(SubjectModelFormMixin):
     # form_validation_cls = SubjectScreeningFormValidator
+    screening_identifier = forms.CharField(
+        label='Screening Identifier',
+        required=False,
+        widget=forms.TextInput(attrs={'readonly': 'readonly'}))
 
     class Meta:
         model = SubjectScreening
