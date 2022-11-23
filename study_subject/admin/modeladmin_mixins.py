@@ -26,7 +26,7 @@ class CrfModelAdminMixin(VisitTrackingCrfModelAdminMixin,
                          FieldsetsModelAdminMixin,
                          FormAsJSONModelAdminMixin,
                          admin.ModelAdmin):
-    post_url_on_delete_name = 'cancer_subject:subject_dashboard_url'
+    post_url_on_delete_name = 'study_subject:subject_dashboard_url'
     instructions = (
         'Please complete the questions below. Required questions are in bold. '
         'When all required questions are complete click SAVE. '

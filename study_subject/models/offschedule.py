@@ -10,7 +10,9 @@ from edc_visit_schedule.model_mixins import OffScheduleModelMixin
 
 
 class OffSchedule(OffScheduleModelMixin, BaseUuidModel):
-
+    """
+    keeps track of subjects who are taken off schedule
+    """
     schedule_name = models.CharField(
         max_length=25,
         blank=True,

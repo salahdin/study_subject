@@ -22,10 +22,7 @@ class SubjectVisit(
     VisitModelMixin, CreatesMetadataModelMixin,
     RequiresConsentFieldsModelMixin, ReferenceModelMixin,
     SiteModelMixin, BaseUuidModel):
-    """A model completed by the user that captures the covering
-    information for the data collected for this timepoint/appointment,
-    e.g.report_datetime.
-    """
+
     appointment = models.OneToOneField(Appointment, on_delete=models.PROTECT)
 
     reason = models.CharField(
@@ -53,4 +50,5 @@ class SubjectVisit(
     history = HistoricalRecords()
 
     class Meta(VisitModelMixin.Meta):
-        pass
+        app_label = 'study_subject'
+        verbose_name = 'Subject Visit'
