@@ -5,9 +5,8 @@ from .form_mixins import SubjectModelFormMixin
 from edc_constants.choices import IDENTITY_TYPE
 
 
-# TODO: add validator
 class SubjectConsentForm(ConsentModelFormMixin, SubjectModelFormMixin):
-    # form_validator_cls = SubjectConsentFormValidation
+    #form_validator_cls = SubjectConsentFormValidation
     subject_identifier = forms.CharField(
         label='Subject Identifier',
         required=False,

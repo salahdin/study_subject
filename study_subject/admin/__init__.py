@@ -4,3 +4,4 @@ from .education_admin import EducationAdmin
 from .community_engagement_admin import CommunityEngagementAdmin
 from .subject_locator_admin import SubjectLocatorAdmin
 from .subject_visit_admin import SubjectVisitAdmin
+from .offscheduleadmin import OffScheduleAdmin

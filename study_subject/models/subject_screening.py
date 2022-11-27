@@ -6,7 +6,7 @@ from django.db import models
 from edc_base.utils import get_utcnow
 from edc_base.model_validators import eligible_if_no
 
-from edc_identifier.model_mixins import UniqueSubjectIdentifierFieldMixin
+from edc_identifier.model_mixins import NonUniqueSubjectIdentifierModelMixin
 from edc_search.model_mixins import SearchSlugModelMixin
 
 from ..eligibility import Eligibility
@@ -14,7 +14,7 @@ from ..screening_identifier import ScreeningIdentifier
 
 
 class SubjectScreening(
-    UniqueSubjectIdentifierFieldMixin, SiteModelMixin,
+    NonUniqueSubjectIdentifierModelMixin, SiteModelMixin,
     SearchSlugModelMixin, BaseUuidModel):
     eligibility_cls = Eligibility
     identifier_cls = ScreeningIdentifier

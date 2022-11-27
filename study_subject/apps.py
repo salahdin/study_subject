@@ -1,14 +1,10 @@
-"""
-1. Define the app
-2. Define the study period.
-3. Define timepoint
-"""
 from django.apps import AppConfig as DjangoAppConfig
 from edc_appointment.constants import COMPLETE_APPT
 from edc_protocol.apps import AppConfig as BaseEdcProtocolAppConfig
 from edc_visit_tracking.apps import AppConfig as BaseEdcVisitTrackingAppConfig
 from datetime import datetime
 from django.conf import settings
+
 
 from edc_timepoint import TimepointCollection, Timepoint
 from edc_timepoint.apps import AppConfig as BaseEdcTimepointAppConfig
@@ -20,6 +16,9 @@ class AppConfig(DjangoAppConfig):
     name = 'study_subject'
     verbose_name = 'Study Subject CRFs'
     admin_site_name = 'study_subject_admin'
+
+    def ready(self):
+        from .models import subject_consent_on_post_save
 
 
 if settings.APP_NAME == 'study_subject':

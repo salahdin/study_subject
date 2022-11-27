@@ -4,6 +4,7 @@ from ..models.subject_consent import SubjectConsent
 from edc_constants.constants import YES, NO, MALE, OTHER
 from edc_base.utils import get_utcnow
 
+
 class SubjectConsentTest(TestCase):
 
     def setUp(self):
@@ -17,8 +18,7 @@ class SubjectConsentTest(TestCase):
         )
 
     def test_subject_consent(self):
-
-        subject_consent_obj=SubjectConsent.objects.create(
+        subject_consent_obj = SubjectConsent.objects.create(
             subject_identifier=None,
             screening_identifier=self.screening_obj.screening_identifier,
             dob=get_utcnow(),

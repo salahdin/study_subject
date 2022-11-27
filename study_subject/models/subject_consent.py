@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.core.exceptions import ImproperlyConfigured
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.sites import SiteModelMixin
@@ -71,6 +73,9 @@ class SubjectConsent(ConsentModelMixin, SiteModelMixin,
     def __str__(self):
         return f'{self.subject_identifier} V{self.version}'
 
+    def age_in_years(self):
+        return date.today().year - self.dob.year
+
     def save(self, *args, **kwargs):
         self.subject_type = 'subject'
         super().save(*args, **kwargs)
@@ -93,6 +98,12 @@ class SubjectConsent(ConsentModelMixin, SiteModelMixin,
             requesting_model=self._meta.label_lower,
             site=self.site)
         return subject_identifier.identifier
+
+    # test
+    def schedule_name(self):
+        """Return a visit schedule name.
+        """
+        return 'schedule'
 
     class Meta(ConsentModelMixin.Meta):
         app_label = 'study_subject'
